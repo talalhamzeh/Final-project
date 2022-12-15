@@ -11,32 +11,66 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import {Link} from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext"
+import { useContext, useState } from "react";
 
 
 function Sidebar (){
+
+    const navigate = useNavigate()
+
+    const {dispatch} = useContext(AuthContext)
+    const handleLogout=(e)=>{
+        e.preventDefault();
+        console.log("test ")
+        
+       
+          // Signed out
+        
+          dispatch({type:"LOGOUT"})
+          navigate("/login")
+        
+        
+      }
+      
+
+    
     return (
         <div className='sidebar' >
             <div className='top'>
-                <span className='logo'> LOGO  </span>
+                <Link to="/" style={{textDecoration: " none" }}>
+                     <span className='logo'> DASHIFY </span> 
+                     </Link>
+                
             </div>
             <hr />
             <div className='center'>
                 <ul>
                     <p className="title"> Main </p>
+                    <Link to="/" style={{textDecoration: " none" }}>
+
                     <li>
                         <DashboardIcon className="icon"/>
                         <span> Dashboard</span>
                     </li>
-                    
+                    </Link>
+                    <Link to="/users" style={{textDecoration: " none" }}>
                     <li>
                         <PersonIcon className="icon"/>
                         <span> Users </span>
                     </li>
+                    </Link>
+                    <Link to="/products" style={{textDecoration: " none" }}>
+
                     <li>
                         <InventoryIcon className="icon"/>
                         <span> Products </span>
                     </li>
+                    </Link>
                     <li>
                         <ShoppingBagIcon className="icon"/>
                         <span> Orders </span>
@@ -75,22 +109,18 @@ function Sidebar (){
                         <AccountBoxIcon className="icon"/>
                         <span> Profile </span>
                     </li>
-                    <li>
+                   
+                    <li onClick={handleLogout}>
                         <LogoutIcon className="icon"/>
                         <span> Logout </span>
                     </li>
                   
-
+                
                 
                 </ul>
             </div>
 
-            <div className='bottom'>
-                <div className="colorOption"> </div>
-                <div className="colorOption"> </div>
-            
-            
-            </div>
+          
 
 
         </div>

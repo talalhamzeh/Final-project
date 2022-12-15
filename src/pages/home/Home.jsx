@@ -11,12 +11,12 @@ import Table from "../../components/table/Table";
 
 
 function Home (){
-    return (
+  
+  return (
         <div className="home">
           <Sidebar/>
           <div className="homecontainer">
             <Navbar/>
-
             <div className="widgets"> 
               <Widget type="user"/>
               
@@ -28,7 +28,7 @@ function Home (){
             </div>
             <div className="charts">
               <Featured />
-              <Charts />
+              <Charts title="last 6 month revenue" aspect={2/1} />
             </div>
             <div className="listContainer">
           <div className="listTitle">Latest Transactions</div>
